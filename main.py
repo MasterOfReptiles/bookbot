@@ -1,3 +1,4 @@
+import sys
 from stats import get_word_count, get_character_count, sort_dictionary
 
 def get_book_text(path_to_file):
@@ -18,12 +19,15 @@ Found {words} total words
     print("============= END ===============")
 
 def main():
-    path_to_book = "./books/frankenstein.txt"
-    book_contents = get_book_text(path_to_book)
-    num_words = get_word_count(book_contents)
-    character_dictionary = get_character_count(book_contents)
-    list_of_characters = sort_dictionary(character_dictionary)
-    print_report(path_to_book,num_words,list_of_characters)
-
+    if len(sys.argv) == 2:
+        path_to_book = sys.argv[1]
+        book_contents = get_book_text(path_to_book)
+        num_words = get_word_count(book_contents)
+        character_dictionary = get_character_count(book_contents)
+        list_of_characters = sort_dictionary(character_dictionary)
+        print_report(path_to_book,num_words,list_of_characters)
+    else:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
 
 main()
